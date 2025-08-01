@@ -74,9 +74,9 @@ public class Reservacion {
         return precioTotal;
     }
 
-    public void setPrecioTotal(double precioTotal) {
+    public void setPrecioTotal() {
         /// calculo de totalidad por noche y el precio total de la habitacion
-        this.precioTotal = precioTotal;
+        this.precioTotal = cantidadNoches * habitacion.getPrecio();
     }
 
     public double getDescuento() {
@@ -86,7 +86,6 @@ public class Reservacion {
     public void setDescuento(double descuento) {
         this.descuento = descuento;
     }
-
 
     public Reservacion(int idReservacion, Habitacion habitacion, Cliente cliente, LocalDate fechaLlegada, double precioTotal, int cantidadNoches) {
         this.idReservacion = idReservacion;

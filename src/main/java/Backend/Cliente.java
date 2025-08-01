@@ -8,7 +8,7 @@ public class Cliente {
     // hace n cantidad de reservas
     // y las reservas tienen n cantidad de habitaciones
     //------------------------------------------
-    /// si hay info sensible, hay que hacer una subclase para eso(gestor de datos) o Clase Miscelanea
+    // si hay info sensible, hay que hacer una subclase para eso(gestor de datos) o Clase Miscelanea
 
     private int idCliente;
     private String identificacion; //como hay letras en IDs de otros paises usar string, pensar en utilidad futura
@@ -64,7 +64,15 @@ public class Cliente {
 
     public void setFechaNacimiento(LocalDate fechaNacimiento) {
         // entregar la fecha para que la persona pueda tener solo 18 o mas anios
+        LocalDate hoy = LocalDate.now();
+        Period periodo = Period.between(fechaNacimiento, hoy);
+        int edadCalculada = periodo.getYears();
+
+        if (edadCalculada < 18) {
+            throw new IllegalArgumentException("El cliente debe ser mayor de edad");
+        }
         this.fechaNacimiento = fechaNacimiento;
+        this.edad = edadCalculada;
     }
 
     public int getEdad() {
@@ -75,7 +83,6 @@ public class Cliente {
         LocalDate fechActual = LocalDate.now();
 
         this.edad = Period.between(fechActual, this.fechaNacimiento).getYears();// el this para ESTA fecha de nacimiento
-
     }
 
     public Cliente(int idCliente, String identificacion, String nombre, String primerApellido, String segundoApellido, LocalDate fechaNacimiento, int edad) {
